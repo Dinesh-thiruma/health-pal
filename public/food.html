@@ -109,6 +109,19 @@
       <div id="editDayModal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title" id="modalTitle">Modal title</p>
+            </header>
+            <section class="modal-card-body">
+                <div>
+                    <label> Test </label>
+                    <input class="input is-normal" id="editTitleInput" type="text"/>
+                </div>
+                <div>
+                    <label> Test 2</label>
+                    <input class="input is-normal" id="editTextInput" type="text"/>
+                </div>
+                
             <section class="modal-card-body">
                 <input class="input is-normal" id="editTitleInput" type="text"/>
                 <input class="input is-normal" id="editTextInput" type="text"/>
@@ -118,7 +131,9 @@
                 <button class="button is-success" onclick="saveDay()">
                     Save changes
                 </button>
+                <button class="button" onclick="closeDayModal()">
                 <button class="button" onclick="closeDay()">
+
                     Cancel
                 </button>
             </footer>
