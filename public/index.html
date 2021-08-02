@@ -28,11 +28,51 @@
     <script defer src="js/script.js"></script>
   </head>
   <body>
-      <section>
-          <h1 class="has-text-centered title">
-              Welcome to Health Pal
-          </h1>
-          
-      </section>
+
+    <div class="has-text-centered block">
+        <br><br>
+        <button class="button is-info" onclick="createAccount()">
+            Create Account
+        </button>
+        <br><br>
+        <button class="button is-info" onclick="login()">
+            Log In
+        </button>
+    </div>
+
+    <div class="hero-body" id="idForm" style="display:none;">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+          <form action="" class="box">
+            <div class="field">
+              <label for="" class="label">Email</label>
+              <div class="control has-icons-left">
+                <input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" required id="emailInput">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="" class="label">Password</label>
+              <div class="control has-icons-left">
+                <input type="password" placeholder="*******" class="input" required id="passwordInput">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <button class="button is-info" id="loginButton" onclick="loginButtonClicked()">
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </body>
 </html>
