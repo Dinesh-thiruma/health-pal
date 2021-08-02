@@ -24,7 +24,7 @@
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
     <link rel="stylesheet" href="css/food.css">
-    <script src="js/food.js"></script>
+    
   </head>
   <body>
       <section>
@@ -37,7 +37,7 @@
                 <div class="tile">
                     <!-- Add content or other tiles -->
                     <div class="content">
-                        <p class="title">One</p>
+                        <p class="title">Monday</p>
                         <div class="content">
                             <p>Test</p>
                         </div>
@@ -46,9 +46,84 @@
                 </div>
                 <div class="tile">
                     <!-- Add content or other tiles -->
-                    <p class="title">Two</p>
+                    <div class="content">
+                        <p class="title">Tuesday</p>
+                        <div class="content">
+                            <p>Test</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tile">
+                    <!-- Add content or other tiles -->
+                    <div class="content">
+                        <p class="title">Wednesday</p>
+                        <div class="content">
+                            <p>Test</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tile">
+                    <!-- Add content or other tiles -->
+                    <div class="content">
+                        <p class="title">Thursday</p>
+                        <div class="content">
+                            <p>Test</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tile">
+                    <!-- Add content or other tiles -->
+                    <div class="content">
+                        <p class="title">Friday</p>
+                        <div class="content">
+                            <p>Test</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tile">
+                    <!-- Add content or other tiles -->
+                    <div class="content">
+                        <p class="title">Saturday</p>
+                        <div class="content">
+                            <p>Test</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tile">
+                    <!-- Add content or other tiles -->
+                    <div class="content">
+                        <p class="title">Sunday</p>
+                        <div class="content">
+                            <p>Test</p>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
       </div>
+      <div id="editDayModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <section class="modal-card-body">
+                <input class="input is-normal" id="editTitleInput" type="text"/>
+                <input class="input is-normal" id="editTextInput" type="text"/>
+                <input id="dayId" type="hidden"/>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success" onclick="saveDay()">
+                    Save changes
+                </button>
+                <button class="button" onclick="closeDay()">
+                    Cancel
+                </button>
+            </footer>
+        </div>
+    </div>
+      <script src="js/food.js"></script>
   </body>
 </html>

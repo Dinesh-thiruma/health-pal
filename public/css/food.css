@@ -6,4 +6,6 @@
 }
 .content {
     margin: auto;
+    white-space: nowrap;
+    overflow: hidden;
 }
