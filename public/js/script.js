@@ -1,4 +1,20 @@
-function signIn() {
+const signInOptions = document.getElementById('signInOptions');
+const signInModal = document.querySelector('#signInModal');
+console.log(signInModal);
+
+function signInWithAccount() {
+    toggleModal();
+}
+
+function createAccount() {
+    
+}
+
+function toggleModal() {
+    signInModal.classList.toggle('is-active');
+}
+
+function signInWithGoogle() {
     var provider = new firebase.auth.GoogleAuthProvider();
   // console.log(provider)
   firebase.auth()
@@ -28,3 +44,4 @@ function signIn() {
     console.log(err);
   });
 }
+
