@@ -23,16 +23,82 @@
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <script src="https://kit.fontawesome.com/d4dbed8638.js" crossorigin="anonymous"></script>
 
     <!-- JS File -->
-    <script src="js/script.js"></script>
+    <script defer src="js/script.js"></script>
   </head>
   <body>
-        <br><br>
-        <div class="has-text-centered">
-            <button class="button is-info" onclick="signIn()">
-                Sign In With Google
-            </button>
+    <section class="hero is-fullheight is-default is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="columns is-vcentered">
+                    <div class="column is-6 is-offset-3">
+                        <h1 class="title is-2">
+                            Welcome to HealthPal!
+                        </h1>
+                        <h2 class="subtitle is-4">
+                            A fitness coach, dietician, and calorie tracker all in one!<br>
+                            Ready to get started?
+                        </h2>
+                        <br>
+                        <p class="has-text-centered">
+                            <a class="button is-medium is-info is-outlined" onclick="signInWithGoogle()">
+                                <span class="icon">
+                                    <i class="fab fa-google"></i>
+                                </span>
+                                <span>Sign In With Google</span>
+                            </a><br><br>
+                            <a class="button is-medium is-info is-outlined" onclick="createAccount()">
+                                <span class="icon">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span>Create A HealthPal Account</span>
+                            </a><br><br>
+                            <a class="button is-medium is-info is-outlined" onclick="signInWithAccount()">
+                                <span class="icon">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </span>
+                                <span>Sign In With HealthPal</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <div class="modal" id="signInModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Create A New HealthPal Account</p>
+                <button class="delete" aria-label="close" onclick="toggleModal()"></button>
+            </header>
+            <section class="modal-card-body">
+              <label for="" class="label">Email</label>
+              <div class="control has-icons-left">
+                <input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" required>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+            <div class="field">
+              <label for="" class="label">Password</label>
+              <div class="control has-icons-left">
+                <input type="password" placeholder="*******" class="input" required>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
+            </div>
+            </section>
+            <footer class="modal-card-foot">
+            <button class="button is-info">Save changes</button>
+            <button class="button is-danger" onclick="toggleModal()">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
   </body>
 </html>
