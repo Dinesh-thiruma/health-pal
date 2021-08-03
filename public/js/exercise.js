@@ -27,3 +27,16 @@ const logExercise = () => {
     exerciseInput.value = "";
   });
 }
+
+const addToPlan = () => {
+    const workoutInput = document.querySelector('#workoutInput');
+    const repetitionInput = document.querySelector('#repetitionInput');
+    
+    firebase.database().ref(`users/${googleUser.uid}`).push({
+        workout: workoutInput.value,
+        repetitions: repetitionInput.value
+    }).then(() => {
+        workoutInput.value = "";
+        repetitionInput.value = "";
+    });
+}

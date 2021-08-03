@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+    <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Health Pal</title>
@@ -22,18 +22,27 @@
       to avoid connecting the SDK to running emulators.
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script src="js/exercise.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-  </head>
-  <body>
-      <section>
-          <h1 class="has-text-centered title">
-              Exercise Plans
-          </h1>
-          <div>
-              <a href="createPlan.html"><button class="button is-success">New Plan</button></a>
-              <button class="button is-link has-text-weight-medium is-medium is-centered">
-                  My Plans
-              </button>
-          </div>
-  </body>
+    </head>
+    <body>
+        <div>
+            <h1>
+              Create a New Workout Plan
+            </h1>
+            <h2>
+              Exercise:
+              <input class="input is-normal" id="workoutInput" type="text" />
+            </h2>
+            <h2>
+              Reps/Duration:
+              <input class="input is-normal" id="repetitionInput" type="text" />
+              <input id="planId" type="hidden" />
+            </h2>
+            <button class="button is-success" onclick="addToPlan()">
+                    Save Exercise to Plan
+            </button>
+            <a href="exercise.html"><button class="button is-danger">Cancel</button></a>
+        </div>
+    </body>
 </html>
