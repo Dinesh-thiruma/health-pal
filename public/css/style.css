@@ -1,8 +1,9 @@
-html, body {
-    font-family: 'Open Sans';
+.sloganLogo {
+    width: 50%;
+    margin: auto;
 }
 
-img {
-    padding: 5px;
-    border: 1px solid #ccc;
+.font {
+    color: #d16286;
+    margin-top: -5px;
 }

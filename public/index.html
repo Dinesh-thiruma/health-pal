@@ -23,50 +23,26 @@
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="https://kit.fontawesome.com/d4dbed8638.js" crossorigin="anonymous"></script>
 
     <!-- JS File -->
     <script defer src="js/script.js"></script>
-  </head>
-  <body>
-    <section class="hero is-fullheight is-default is-bold">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <div class="columns is-vcentered">
-                    <div class="column is-6 is-offset-3">
-                        <h1 class="title is-2">
-                            Welcome to HealthPal!
-                        </h1>
-                        <h2 class="subtitle is-4">
-                            A fitness coach, dietician, and calorie tracker all in one!<br>
-                            Ready to get started?
-                        </h2>
-                        <br>
-                        <p class="has-text-centered">
-                            <a class="button is-medium is-info is-outlined" onclick="signInWithGoogle()">
-                                <span class="icon">
-                                    <i class="fab fa-google"></i>
-                                </span>
-                                <span>Sign In With Google</span>
-                            </a><br><br>
-                            <a class="button is-medium is-info is-outlined" onclick="createAccount()">
-                                <span class="icon">
-                                    <i class="fas fa-envelope"></i>
-                                </span>
-                                <span>Create A HealthPal Account</span>
-                            </a><br><br>
-                            <a class="button is-medium is-info is-outlined" onclick="signInWithAccount()">
-                                <span class="icon">
-                                    <i class="fas fa-sign-in-alt"></i>
-                                </span>
-                                <span>Sign In With HealthPal</span>
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </head>
+    <body>
+    <img class="image sloganLogo" src="assets/SloganLogo.png" alt="HealthPal"/>
+    <h2 class="font subtitle is-4 has-text-centered">
+        A fitness coach, dietician, and calorie tracker all in one!<br>
+        Ready to get started?
+    </h2>
+    <p class="has-text-centered">
+        <a class="button is-medium is-danger is-outlined" onclick="signInWithGoogle()">
+            <span class="icon">
+                <img class="image is-24x24" src="http://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png"/>
+            </span>
+            <span>Sign In With Google</span>
+        </a>
+    </p>
 
     <div class="modal" id="signInModal">
         <div class="modal-background"></div>
