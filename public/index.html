@@ -30,51 +30,48 @@
     <script defer src="js/script.js"></script>
     </head>
     <body>
-    <img class="image sloganLogo" src="assets/SloganLogo.png" alt="HealthPal"/>
-    <h2 class="font subtitle is-4 has-text-centered">
-        A fitness coach, dietician, and calorie tracker all in one!<br>
-        Ready to get started?
-    </h2>
-    <p class="has-text-centered">
-        <a class="button is-medium is-danger is-outlined" onclick="signInWithGoogle()">
-            <span class="icon">
-                <img class="image is-24x24" src="http://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png"/>
-            </span>
-            <span>Sign In With Google</span>
-        </a>
-    </p>
+        <!-- LOGO -->
+        <section>
+            <img class="image sloganLogo" src="assets/SloganLogo.png" alt="HealthPal"/>
+            <h2 class="font subtitle is-4 has-text-centered">
+                A fitness coach, dietician, and calorie tracker all in one!<br>
+                Ready to get started?
+            </h2>
+            <p class="has-text-centered">
+                <a class="button is-medium is-danger is-outlined" onclick="signInWithGoogle()">
+                    <span class="icon">
+                        <img class="image is-24x24" src="http://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png"/>
+                    </span>
+                    <span>Sign In With Google</span>
+                </a>
+            </p>
+            <br>
+        </section>
 
-    <div class="modal" id="signInModal">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Create A New HealthPal Account</p>
-                <button class="delete" aria-label="close" onclick="toggleModal()"></button>
-            </header>
-            <section class="modal-card-body">
-              <label for="" class="label">Email</label>
-              <div class="control has-icons-left">
-                <input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" required>
-                <span class="icon is-small is-left">
-                  <i class="fa fa-envelope"></i>
-                </span>
-              </div>
-            <div class="field">
-              <label for="" class="label">Password</label>
-              <div class="control has-icons-left">
-                <input type="password" placeholder="*******" class="input" required>
-                <span class="icon is-small is-left">
-                  <i class="fa fa-lock"></i>
-                </span>
-              </div>
+        <hr>
+        <!-- EXERCISE -->
+        <section>
+            <div class="columns">
+                <div class="column is one-third">
+                    <img src="assets/PersonalTrainer.svg" style="padding: 70px;"/>
+                </div>
+                <div class="column is one-third text">
+                    <h1 class="font title is-2 is-spaced">
+                        Never work out alone again!
+                    </h1>
+                    <h2 class="subtitle is-4">
+                        With HealthPal, design and save custom workout based on your specific goals, 
+                        whether that be bulking, cutting, or anything in between!<br>
+                    </h2>
+                    <h2 class="subtitle is-4">
+                        <span class="font"><b>Don't know where to start?</b></span>
+                        Don't worry, check out this 
+                        <a href="exercise.html">
+                            simple quiz.
+                        </a>
+                    </h2>
+                </div>
             </div>
-            </section>
-            <footer class="modal-card-foot">
-            <button class="button is-info">Save changes</button>
-            <button class="button is-danger" onclick="toggleModal()">Cancel</button>
-            </footer>
-        </div>
-    </div>
-
+        </section>
   </body>
 </html>
