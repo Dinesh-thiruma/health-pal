@@ -27,8 +27,3 @@ const logExercise = () => {
     exerciseInput.value = "";
   });
 }
-
-const closeExerciseModal = () => {
-    const logExerciseModal = document.querySelector('#logExerciseModal');
-    logExerciseModall.classList.toggle('is-active');
-}
