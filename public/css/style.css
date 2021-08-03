@@ -7,3 +7,20 @@
     color: #d16286;
     margin-top: -5px;
 }
+
+h1, h2 {
+    vertical-align: middle;
+}
+
+.text {
+    padding: 30px;
+    margin-top: 90px;
+}
+
+a {
+    color: #d16286;
+}
+
+a:hover {
+    color: black;
+}
