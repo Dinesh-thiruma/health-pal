@@ -1,6 +1,7 @@
 let googleUserId;
 const week = ["Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"];
-
+let sunday = getSunday(new Date());
+let totalCalories = 0;
 
 window.onload = (event) => {
   firebase.auth().onAuthStateChanged(function(user) {
@@ -8,7 +9,7 @@ window.onload = (event) => {
         console.log('Logged in as: ' + user.displayName);
         googleUserId = user.uid;
         // Get start of the week and current date
-        let sunday = getSunday(new Date());
+        
         let day = getCurrentDate();
         // Load the calendar visuals
         loadFoodSchedule(sunday);
@@ -26,41 +27,44 @@ const loadFoodSchedule = (week) => {
     const foodRef = firebase.database().ref(`users/${googleUserId}/food-tracker/${week}/`).on('value', (snapshot) => {
         const data = snapshot.val();
         loadCalendar(data);
+        countTotalCalories(data);
     });
 }
 
+function countTotalCalories(data) {
+    for(const value in data) {
+        let foodID = data[value];
+        for(const element in foodID) {
+            totalCalories += foodID[element].calorieCount;
+        }
+    }
+}
+
 function loadCalendar(data,) { 
-    let calendar = '';
-    
-    
     document.querySelectorAll('.calendar').forEach((date) =>{
         let dayoftheWeek = date.innerHTML;
-        for(element in week){
-            if(dayoftheWeek == week[element])
-            {
-                let d  = new Date();
-                console.log(d.getDay());
-                console.log((element));
-                if(d.getDay() == element)
-                {
-                    for(const days in data)
-                {
-                    const foodID = data[days];
-                    for(const k in foodID)
-                    {
-                        const info = foodID[k];
-                        calendar += createCalendar(info);
-                        
-                    }
-                }
-                    let content = document.createElement("content");
-                    content.innerHTML = calendar;
-
-                    date.insertAdjacentElement("afterend", content);
-                }
-            }
+        let calendar = '';
             
-        }
+        let d  = new Date();
+        let targetDate = findTargetDate(dayoftheWeek,sunday);
+        
+        for(const days in data)
+        {
+            // Checks if the day in the database is the same as the day it's looping through
+            if(days == targetDate)
+            {
+                const foodID = data[days];
+                for(const k in foodID)
+                {
+                    const info = foodID[k];
+                    calendar += createCalendar(info);
+                    
+                }
+                let content = document.createElement("content");
+                content.innerHTML = calendar;
+                date.insertAdjacentElement("afterend", content);
+            }
+        }              
     });
 }
 
@@ -138,7 +142,6 @@ function closeModal() {
     addEntryModal.classList.toggle("is-active");
 }
 function createEntry() {
-    let sunday = getSunday(new Date());
     // Get target date from hidden textbox
     let targetDay = document.getElementById("targetDate");
     let targetDate = findTargetDate(targetDay.value, sunday)
@@ -148,11 +151,13 @@ function createEntry() {
     let imageURL = document.getElementById("addImageURL");
 
     firebase.database().ref(`users/${googleUserId}/food-tracker/${sunday}/${targetDate}`).push({
-        calorieCount : calorieCount.value,
+        calorieCount : parseInt(calorieCount.value),
         food : food.value,
         imageURL : imageURL.value
     })
-    console.log(food.value, calorieCount.value, imageURL.value);
+
+    addEntryModal = document.getElementById("addEntryModal");
+    addEntryModal.classList.toggle("is-active");
 }
 function findTargetDate(day, sunday) {
     let dateArray = sunday.split('-');

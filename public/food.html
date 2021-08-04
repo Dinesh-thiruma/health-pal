@@ -27,64 +27,70 @@
     
   </head>
   <body>
-      <section>
+      <div class="box">
           <h1 class="has-text-centered title">
               Welcome to Health Pal Food
           </h1>
-      </section>
-      <div class="container">
+      </div>
+      <div class="section">
             <div class="tile is-ancestor" id="ancestorTile">
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Sunday</p>
                         <button class="button is-small" onclick="addEntry(`Sunday`)">+</button>
-                    </div>               
+                    </div>            
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Monday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Monday`)">+</button>
                     </div>               
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Tuesday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Tuesday`)">+</button>
                     </div>               
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Wednesday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Wednesday`)">+</button>
                     </div>               
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Thursday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Thursday`)">+</button>
                     </div>               
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Friday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Friday`)">+</button>
                     </div>               
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Saturday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Saturday`)">+</button>
                     </div>               
                 </div>
             </div>
       </div>
+      <div class="box">
+        <h1 class="title">Calorie Goal</h1>
+        <progress class="progress is-danger" value="15" max="100">15%</progress>
+        <input class="input" type="text" placeholder="Insert Calorie Goal">
+      </div>
+      
       <!-- Add modal -->
       <div id="addEntryModal" class="modal">
         <div class="modal-background"></div>
