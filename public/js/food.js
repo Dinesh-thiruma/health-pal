@@ -93,7 +93,7 @@ function unformatDate(formattedDate) {
     for(const number in dateArray) {
         newArray.push(parseInt(dateArray[number],10));
     }
-    return new Date(newArray[0],newArray[1],newArray[2]);
+    return new Date(newArray[0],newArray[1] - 1,newArray[2]);
 }
 
 
@@ -114,10 +114,30 @@ function closeDayModal() {
 
 
 
-// Activate the modal 
+// Activate edit modal 
 function editDay(tile) {
     editModalTitle = document.getElementById("modalTitle");
     editModalTitle.value = "That day";
     editDayModal = document.getElementById("editDayModal");
     editDayModal.classList.toggle("is-active");
+}
+
+// Activate add modal
+function addEntry(day) {
+    addModalTitle = document.getElementById("addmodalTitle");
+    addModalTitle.value = day;
+
+    addEntryModal = document.getElementById("addEntryModal");
+    addEntryModal.classList.toggle("is-active");
+}
+function closeModal() {
+    addEntryModal = document.getElementById("addEntryModal");
+    addEntryModal.classList.toggle("is-active");
+}
+function createEntry() {
+    let sunday = unformatDate(getSunday(new Date()));
+    let food = document.getElementById();
+    let calorieCount = document.getElementById();
+    let imageURL = document.getElementById();
+    console.log(sunday);
 }
