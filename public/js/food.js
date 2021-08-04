@@ -129,15 +129,43 @@ function addEntry(day) {
 
     addEntryModal = document.getElementById("addEntryModal");
     addEntryModal.classList.toggle("is-active");
+    // "Save" target date into a hidden textbox for later
+    targetDate = document.getElementById("targetDate");
+    targetDate.value = day;
 }
 function closeModal() {
     addEntryModal = document.getElementById("addEntryModal");
     addEntryModal.classList.toggle("is-active");
 }
 function createEntry() {
-    let sunday = unformatDate(getSunday(new Date()));
-    let food = document.getElementById();
-    let calorieCount = document.getElementById();
-    let imageURL = document.getElementById();
-    console.log(sunday);
+    let sunday = getSunday(new Date());
+    // Get target date from hidden textbox
+    let targetDay = document.getElementById("targetDate");
+    let targetDate = findTargetDate(targetDay.value, sunday)
+
+    let food = document.getElementById("addFood");
+    let calorieCount = document.getElementById("addCalorieCount");
+    let imageURL = document.getElementById("addImageURL");
+
+    firebase.database().ref(`users/${googleUserId}/food-tracker/${sunday}/${targetDate}`).push({
+        calorieCount : calorieCount.value,
+        food : food.value,
+        imageURL : imageURL.value
+    })
+    console.log(food.value, calorieCount.value, imageURL.value);
+}
+function findTargetDate(day, sunday) {
+    let dateArray = sunday.split('-');
+    let newArray = [];
+    let diff;
+    for(const number in dateArray) {
+        newArray.push(parseInt(dateArray[number],10));
+    }
+    for(const element in week){
+        if(week[element] == day)
+        {
+            diff = parseInt(element);
+        }
+    }
+    return new Date(newArray[0],newArray[1] - 1,newArray[2] + diff).toLocaleDateString('en-CA', {year: 'numeric', month: '2-digit', day: '2-digit'});
 }
