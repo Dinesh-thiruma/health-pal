@@ -33,76 +33,55 @@
           </h1>
       </section>
       <div class="container">
-            <div class="tile is-ancestor">
+            <div class="tile is-ancestor" id="ancestorTile">
                 <div class="tile">
                     <!-- Add content or other tiles -->
-                    <div class="content">
-                        <p class="title">Monday</p>
-                        <div class="content">
-                            <p>Test</p>
-                        </div>
-                    </div>
-                    
+                    <div class="content calendarContent">
+                        <p class="title calendar">Sunday</p>
+                        <button class="button is-small">+</button>
+                    </div>               
                 </div>
                 <div class="tile">
                     <!-- Add content or other tiles -->
-                    <div class="content">
-                        <p class="title">Tuesday</p>
-                        <div class="content">
-                            <p>Test</p>
-                        </div>
-                    </div>
-                    
+                    <div class="content calendarContent">
+                        <p class="title calendar">Monday</p>
+                        <button class="button is-small">+</button>
+                    </div>               
                 </div>
                 <div class="tile">
                     <!-- Add content or other tiles -->
-                    <div class="content">
-                        <p class="title">Wednesday</p>
-                        <div class="content">
-                            <p>Test</p>
-                        </div>
-                    </div>
-                    
+                    <div class="content calendarContent">
+                        <p class="title calendar">Tuesday</p>
+                        <button class="button is-small">+</button>
+                    </div>               
                 </div>
                 <div class="tile">
                     <!-- Add content or other tiles -->
-                    <div class="content">
-                        <p class="title">Thursday</p>
-                        <div class="content">
-                            <p>Test</p>
-                        </div>
-                    </div>
-                    
+                    <div class="content calendarContent">
+                        <p class="title calendar">Wednesday</p>
+                        <button class="button is-small">+</button>
+                    </div>               
                 </div>
                 <div class="tile">
                     <!-- Add content or other tiles -->
-                    <div class="content">
-                        <p class="title">Friday</p>
-                        <div class="content">
-                            <p>Test</p>
-                        </div>
-                    </div>
-                    
+                    <div class="content calendarContent">
+                        <p class="title calendar">Thursday</p>
+                        <button class="button is-small">+</button>
+                    </div>               
                 </div>
                 <div class="tile">
                     <!-- Add content or other tiles -->
-                    <div class="content">
-                        <p class="title">Saturday</p>
-                        <div class="content">
-                            <p>Test</p>
-                        </div>
-                    </div>
-                    
+                    <div class="content calendarContent">
+                        <p class="title calendar">Friday</p>
+                        <button class="button is-small">+</button>
+                    </div>               
                 </div>
                 <div class="tile">
                     <!-- Add content or other tiles -->
-                    <div class="content">
-                        <p class="title">Sunday</p>
-                        <div class="content">
-                            <p>Test</p>
-                        </div>
-                    </div>
-                    
+                    <div class="content calendarContent">
+                        <p class="title calendar">Saturday</p>
+                        <button class="button is-small">+</button>
+                    </div>               
                 </div>
             </div>
       </div>
@@ -113,18 +92,18 @@
                 <p class="modal-card-title" id="modalTitle">Modal title</p>
             </header>
             <section class="modal-card-body">
-                <div>
-                    <label> Test </label>
-                    <input class="input is-normal" id="editTitleInput" type="text"/>
+                <div style="float:left;">
+                    <label> Food </label>
+                    <input class="input is-normal" id="editFood" type="text" size="35"/>
+                </div>
+                <div style="float:left;">
+                    <label> Calorie Count</label>
+                    <input class="input is-normal" id="editCalorieCount" type="text" size="10"/>
                 </div>
                 <div>
-                    <label> Test 2</label>
-                    <input class="input is-normal" id="editTextInput" type="text"/>
+                    <label> Image URL (optional)</label>
+                    <input class="input is-normal" id="editImageURL" type="text""/>
                 </div>
-                
-            <section class="modal-card-body">
-                <input class="input is-normal" id="editTitleInput" type="text"/>
-                <input class="input is-normal" id="editTextInput" type="text"/>
                 <input id="dayId" type="hidden"/>
             </section>
             <footer class="modal-card-foot">
@@ -132,8 +111,6 @@
                     Save changes
                 </button>
                 <button class="button" onclick="closeDayModal()">
-                <button class="button" onclick="closeDay()">
-
                     Cancel
                 </button>
             </footer>
