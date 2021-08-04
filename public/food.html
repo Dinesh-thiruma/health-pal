@@ -38,7 +38,7 @@
                     <!-- Add content or other tiles -->
                     <div class="content calendarContent">
                         <p class="title calendar">Sunday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Sunday`)">+</button>
                     </div>               
                 </div>
                 <div class="tile">
@@ -85,11 +85,44 @@
                 </div>
             </div>
       </div>
-      <div id="editDayModal" class="modal">
+      <!-- Add modal -->
+      <div id="addEntryModal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title" id="modalTitle">Modal title</p>
+            </header>
+            <section class="modal-card-body">
+                <div style="float:left;">
+                    <label> Food </label>
+                    <input class="input is-normal" id="addFood" type="text" size="35"/>
+                </div>
+                <div style="float:left;">
+                    <label> Calorie Count</label>
+                    <input class="input is-normal" id="addCalorieCount" type="text" size="10"/>
+                </div>
+                <div>
+                    <label> Image URL (optional)</label>
+                    <input class="input is-normal" id="addImageURL" type="text""/>
+                </div>
+                <input id="dayId" type="hidden"/>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success" onclick="createEntry()">
+                    Add Entry
+                </button>
+                <button class="button" onclick="closeModal()">
+                    Cancel
+                </button>
+            </footer>
+        </div>
+      </div>
+      <!-- Edit modal -->
+      <div id="editDayModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title" id="addmodalTitle">Modal title</p>
             </header>
             <section class="modal-card-body">
                 <div style="float:left;">
@@ -115,7 +148,7 @@
                 </button>
             </footer>
         </div>
-    </div>
+      </div>
       <script src="js/food.js"></script>
   </body>
 </html>
