@@ -70,10 +70,10 @@ const createCard = (plan, planId) => {
      <div class="column is-one-quarter">
        <div class="card">
          <header class="card-header">
-           <p class="card-header-title">${plan.workout}</p>
+           <p class="card-header-title">Workout: ${plan.workout}</p>
          </header>
          <div class="card-content">
-           <div class="content">${plan.repetitions}</div>
+           <div class="content">Repetitions/Duration: ${plan.repetitions}</div>
          </div>
        </div>
      </div>
