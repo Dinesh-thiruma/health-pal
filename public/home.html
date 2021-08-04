@@ -27,8 +27,64 @@
     <script src=""></script>
   </head>
   <body>
-      <section><br>
-          <img class="image is-48x48" style="margin-left: 90%;" src="https://www.iconpacks.net/icons/2/free-settings-icon-3110-thumb.png"/>
+
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+            <img class="image" src="assets/Logo.png"><br>
+            <p class="title is-5">&nbspHealthPal</p>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+            <a class="navbar-item" href="food.html">
+                Food
+            </a>
+
+            <a class="navbar-item" href="exercise.html">
+                Exercise
+            </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                More
+                </a>
+
+                <div class="navbar-dropdown">
+                <a class="navbar-item">
+                    Settings
+                </a>
+                <a class="navbar-item">
+                    My Account
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item has-text-danger" href="index.html">
+                    Sign Out
+                </a>
+                </div>
+            </div>
+            </div>
+
+            <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                <a class="button is-danger" href="index.html">
+                    <strong>Sign Out</strong>
+                </a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </nav>
+
+      <section><br><br><br>
           <img style="width: 20%; margin: auto;"class="image" src="https://www.pngarts.com/files/3/Avatar-PNG-Download-Image.png" alt="Profile Picture"/>
           <br><h2 class="has-text-centered subtitle is-5">
               Welcome back,
@@ -65,6 +121,30 @@
           <h2 class="title is-3" style="margin-left: 5%">
               Food Log:
           </h2>
+          
+          <div class="columns" style="padding-left: 5%; padding-right: 5%; overflow-x: auto">
+              <div class="column is-3">
+                  <div class="card">
+                      <header class="card-header">
+                        <p class="card-header-title is-centered">
+                        Pizza
+                        </p>
+                    </header>
+                    <div class="card-content has-text-centered">
+                        <img src="https://i.pinimg.com/originals/ef/be/ad/efbead742fab4ff35c1015ae1123bf4e.png">
+                        <h3 class="subtitle is-6 is-spaced"><br>
+                            Calories: <b>1000</b><br>
+                            Date: <b><time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time></b>
+                        </h3>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item">Edit</a>
+                        <a href="#" class="card-footer-item">Delete</a>
+                    </footer>
+                  </div>
+              </div>
+          </div>
+
       </section>
       <section>
           <a href="food.html"><button class="button is-link has-text-weight-medium is-medium is-centered">Food</button></a>
