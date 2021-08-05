@@ -8,16 +8,33 @@ window.onload = (event) => {
     if (user) {        
         console.log('Logged in as: ' + user.displayName);
         googleUserId = user.uid;
-        // Load the calendar visuals
-        loadFoodSchedule(sunday);
-
+        // Load sunday from the database
+        const sundayRef = firebase.database().ref(`users/${googleUserId}/food-tracker/info/selected-week`).on('value', (snapshot) => {
+            const data = snapshot.val();
+            // If there isn't any data set current date's sunday
+            if(data == null)
+            {
+                firebase.database().ref(`users/${googleUserId}/food-tracker/info/selected-week`).set({
+                    week: sunday
+                })
+            }
+            else {
+                sunday = data.week;
+            }
+            // Load the calendar visuals
+            loadFoodSchedule(sunday);            
+        });
+        
     } else {
       window.location = 'index.html'; // If not logged in, navigate back to login page.
     }
   });
 };
 
-
+function loadSunday() {
+    
+    
+}
 
 // Get schedule from the database
 const loadFoodSchedule = (week) => {
@@ -37,14 +54,13 @@ function countTotalCalories(data) {
     }
 }
 
-function loadCalendar(data,) { 
+function loadCalendar(data) { 
     document.querySelectorAll('.calendar').forEach((date) =>{
         let dayoftheWeek = date.innerHTML;
         let calendar = '';
             
         let d  = new Date();
         let targetDate = findTargetDate(dayoftheWeek);
-        
         for(const days in data)
         {
             // Checks if the day in the database is the same as the day it's looping through
@@ -163,6 +179,7 @@ function deleteEntry() {
     firebase.database().ref(`users/${googleUserId}/food-tracker/${sunday}/${targetDay.value}/${id}`).remove();
     let editEntryModal = document.getElementById("editModal");
     editEntryModal.classList.toggle("is-active");
+    location.reload()
 }
 // Close edit modal
 function closeEditModal() {
@@ -250,3 +267,13 @@ calorieGoal.addEventListener("change", ()=>{
     progressBar.value = percentage;
 });
 
+let chosenDay = document.getElementById("chosenDay");
+chosenDay.addEventListener("change", ()=> {
+    let chosenDate = chosenDay.value.split("-");
+    let newSunday = getSunday(new Date(chosenDate[2], chosenDate[0] - 1, chosenDate[1]));
+
+    firebase.database().ref(`users/${googleUserId}/food-tracker/info/selected-week`).update({
+        week: newSunday,
+    })
+    location.reload();
+});

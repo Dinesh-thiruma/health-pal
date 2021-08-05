@@ -22,7 +22,7 @@
       to avoid connecting the SDK to running emulators.
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="css/food.css">
     
   </head>
@@ -89,6 +89,10 @@
         <h1 class="title">Calorie Goal</h1>
         <progress id="calorieProgress" class="progress is-danger" value="0" max="100"></progress>
         <input id="calorieGoal" class="input" type="number" placeholder="Insert Calorie Goal">
+      </div>
+      <div class="box">
+        <h1 class="title">Change Week</h1>
+        <input id="chosenDay" class="input" type="string" placeholder="8-9-2021">
       </div>
       
       <!-- Add modal -->
