@@ -25,6 +25,30 @@ window.onload = (event) => {
   });
 };
 
-function launchExerciseModal() {
+function toggleExerciseModal() {
     document.getElementById('logExerciseModal').classList.toggle("is-active");
+}
+
+function changeIcon() {
+    const exerciseSelect = document.getElementById('exerciseSelect');
+    const exerciseIcon = document.getElementById('exerciseIcon');
+    exerciseIcon.removeAttribute('class');
+    exerciseIcon.classList.add('fas');
+    switch(exerciseSelect.value) {
+        case "Run":
+            exerciseIcon.classList.add('fa-running');
+            break;
+        case "Walk":
+            exerciseIcon.classList.add('fa-walking');
+            break;
+        case "Swim":
+            exerciseIcon.classList.add('fa-swimmer');
+            break;
+        case "Bike":
+            exerciseIcon.classList.add('fa-biking');
+            break;
+        case "Gym":
+           exerciseIcon.classList.add('fa-dumbbell');
+            break; 
+    }
 }
