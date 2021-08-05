@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Account</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.8.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.8.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.8.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.8.1/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.8.1/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.8.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.8.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.8.1/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.8.1/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.8.1/firebase-performance.js"></script>
+    <script src="https://unpkg.com/swup@latest/dist/swup.min.js"></script>  
+    <link rel="stylesheet" href="css/createUser.css"/>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="shortcut icon" href="assets/Logo.png" />
+    
+    <script src="https://kit.fontawesome.com/d4dbed8638.js" crossorigin="anonymous"></script>
+    <script defer src="js/createUser.js"></script>
+    </head>
+    <body>
+        <section class="has-text-centered" id="step1">
+            <br><br>
+            <h1 class="has-text-centered heading is-3">
+                Welcome to
+            </h1>
+            <img class="image" width="10%" style="margin: auto;" src="assets/Logo.png">
+            <img class="image" width="20%" style="margin: auto;" src="assets/LogoName.png">
+            <h1 class="title is-2"><br>
+                Let's get you started.
+            </h1>
+            <h1 class="title is-3 is-spaced"><br>
+                Step 1:
+            </h1>
+            <h1 class="title is-4" style="margin-top: -1%">
+                What's your name?
+            </h1>
+            <input class="input is-large is-info" type="text" placeholder="Name" style="width: 50%;" id="nameInput">
+        </section>
+
+        <section class="has-text-centered" id="step2" style="display: none;">
+            <h1 id="welcomeName" class="title is-2"><br>
+                Hi Dinesh!
+            </h1>
+            <h1 class="title is-3 is-spaced" style="text-align: center;">
+                Step 2:
+            </h1>
+            <h1 class="title is-4" style="text-align: center; margin-top: -1%">
+                Choose your profile picture:
+            </h1><br><br>
+            <div class="columns">
+                <div width="40%" class="column" style="margin-left: 5%;">
+                    <img id="profilePic" style="width: 85%; margin: auto;"class="image" src="https://www.pngarts.com/files/3/Avatar-PNG-Download-Image.png" alt="Profile Picture"/>
+                </div>
+                <div width="40%" style="margin-left: 10%; margin-right: 5%; margin-top: 1%;" class="column has-text-centered">
+                    <h1 class="title is-4 has-text-centered">
+                        Profile Picture:
+                    </h1>
+                    <div class="columns has-text-centered">
+                        <div class="column is-one-fourth">
+                            <img style="margin:auto;" id="boy1" class="image zoom is-128x128" src="assets/profilepic/boy1blue.png" onclick="clickedProfilePicture(this)"/>
+                        </div>
+                        <div class="column is-one-fourth">
+                            <img style="margin:auto;" id="girl1" class="image zoom is-128x128" src="assets/profilepic/girl1blue.png" onclick="clickedProfilePicture(this)"/>
+                        </div>
+                        <div class="column is-one-fourth">
+                            <img style="margin:auto;" id="boy2" class="image zoom is-128x128" src="assets/profilepic/boy2blue.png" onclick="clickedProfilePicture(this)"/>
+                        </div>
+                    </div>
+                    <div class="columns has-text-centered">
+                        <div class="column is-one-fourth">
+                            <img style="margin:auto;" id="girl2" class="image zoom is-128x128" src="assets/profilepic/girl2blue.png" onclick="clickedProfilePicture(this)"/>
+                        </div>
+                        <div class="column is-one-fourth">
+                            <img style="margin:auto;" id="boy3" class="image zoom is-128x128" src="assets/profilepic/boy3blue.png" onclick="clickedProfilePicture(this)"/>
+                        </div>
+                        <div class="column is-one-fourth">
+                            <img style="margin:auto;" id="girl3" class="image is-rounded zoom is-128x128" src="assets/profilepic/girl3blue.png" onclick="clickedProfilePicture(this)"/>
+                        </div>
+                    </div><br>
+                    <h1 class="title is-4 has-text-centered">
+                        Background Color:
+                    </h1>
+                    <div class="columns" style="margin-left: 10%; margin-right: 10%;">
+                        <div class="column is-one-sixth">
+                            <button id="blue" class="button zoom" style="background-color: #58b1e0; border: none;" onclick="clickedButton(this)"></button>
+                        </div>
+                        <div class="column is-one-sixth">
+                            <button id="pink" class="button zoom" style="background-color: #E0BBE4; border: none;" onclick="clickedButton(this)"></button>
+                        </div>
+                        <div class="column is-one-sixth">
+                            <button id="green" class="button zoom" style="background-color: #E2F0CB; border: none;" onclick="clickedButton(this)"></button>
+                        </div>
+                        <div class="column is-one-sixth">
+                            <button id="red" class="button zoom" style="background-color: #FFB7B2; border: none;" onclick="clickedButton(this)"></button>
+                        </div>
+                        <div class="column is-one-sixth">
+                            <button id="orange" class="button zoom" style="background-color: #FFDAC1; border: none;" onclick="clickedButton(this)"></button>
+                        </div>
+                        <div class="column is-one-sixth">
+                            <button id="white" class="button zoom" style="background-color: #FFFBF0; border: none;" onclick="clickedButton(this)"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <br><br><br>
+        <div class="has-text-centered">
+        <button class="is-danger is-large is-outlined button has-text-centered" onclick="saveProfilePic()">
+            Meet your HealthPal!
+        </button>
+        </section>
+        </div>
+        <br><br><br>
+    </body>
+</html>

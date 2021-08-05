@@ -10,7 +10,15 @@ function signInWithGoogle() {
 
     // The signed-in user info.
     var user = result.user;
-    window.location="home.html";
+
+    firebase.database().ref(`users/${user.uid}/userInfo/`).on('value', (snapshot) => {
+        if(snapshot.exists()) {
+            window.location="home.html";
+        }else {
+            window.location="createUser.html";
+        }
+    });
+
   }).catch((error) => {
     // Handle Errors here.
     var errorCode = error.code;
