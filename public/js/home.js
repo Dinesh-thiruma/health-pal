@@ -98,8 +98,30 @@ const createPlanCard = (plan, planId) => {
    `;
 };
 
-function toggleExerciseModal() {
-    document.getElementById('logExerciseModal').classList.toggle("is-active");
+let numPressed = 0;
+function logExercise() {
+    numPressed++;
+
+    if(numPressed === 1) {
+        document.getElementById('logExerciseDiv').style.display="block";
+        document.getElementById('logExerciseButton').innerHTML = "Confirm";
+    }else {
+        document.getElementById('logExerciseDiv').style.display="none";
+        numPressed = 0;
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+
+        firebase.database().ref(`users/${googleUser.uid}`).push({
+            date: today,
+            exercise: document.getElementById('exerciseSelect').value,
+        });
+        document.getElementById('logExerciseButton').innerHTML = "Log A New Exercise";
+    }
 }
 
 function changeIcon() {
@@ -124,19 +146,4 @@ function changeIcon() {
            exerciseIcon.classList.add('fa-dumbbell');
             break; 
     }
-}
-
-function logExercise() {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-
-    today = mm + '/' + dd + '/' + yyyy;
-
-    firebase.database().ref(`users/${googleUser.uid}`).push({
-        date: today,
-        exercise: document.getElementById('exerciseSelect').value,
-    });
-    toggleExerciseModal();
 }

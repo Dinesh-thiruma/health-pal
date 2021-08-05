@@ -444,24 +444,7 @@
                   </div>
               </div>
           </div> -->
-          <div class="has-text-centered">
-                <button class="button is-success is-outlined" onclick="toggleExerciseModal()">
-                    Log A New Exercise
-                </button>
-            </div>
-      </section>
-
-      <div id="logExerciseModal" class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-            <p class="modal-card-title">Log A New Exercise</p>
-            <button class="delete" aria-label="close" onclick="toggleExerciseModal()"></button>
-            </header>
-            <section class="modal-card-body">
-                <h1 class="title is-5">
-                    Exercise:
-                </h1>
+          <div id="logExerciseDiv" class="has-text-centered" style="display: none;">
                 <div class="control has-icons-left">
                     <div class="select">
                         <select id="exerciseSelect" onchange="changeIcon();">
@@ -472,16 +455,18 @@
                         <option>Gym</option>
                         </select>
                     </div>
-                    <span class="icon is-medium is-left has-text-dark">
+                    <span class="icon is-medium is-center has-text-dark" style="margin-left: -120px;">
                         <i id="exerciseIcon" class="fas fa-running"></i>
                     </span>
                 </div>
-            </section>
-            <footer class="modal-card-foot">
-            <button class="button is-danger" onclick="logExercise()">Log</button>
-            <button class="button" onclick="toggleExerciseModal()">Cancel</button>
-            </footer>
-        </div>
+            </div>
+            <br>
+      </section>
+
+    <div class="has-text-centered">
+        <button id="logExerciseButton" class="button is-success is-outlined" onclick="logExercise()">
+            Log A New Exercise
+        </button>
     </div>
 
       <section><br><br>
