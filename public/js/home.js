@@ -46,7 +46,9 @@ const renderFoodAsHtml = (data) => {
     // Get food-log-title
     let foodLogTitle = document.getElementById("food-log-title");
     let content = document.createElement("div");
+    // Add classess/styling
     content.classList.add("columns")
+    content.style.cssText = "padding-left: 5%; padding-right: 5%; padding-bottom: 1%; overflow-x: auto";
     content.innerHTML = foodEntries;
     foodLogTitle.insertAdjacentElement("afterend", content);
 }
