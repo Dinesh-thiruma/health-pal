@@ -46,19 +46,39 @@ const renderDataAsHtml = (data) => {
     }
   };
   // Inject our string of HTML into our viewNotes.html page
-  document.querySelector('#exerciseCard').innerHTML = exercises;
+  document.querySelector('#cardColumns').innerHTML = exercises;
 };
 
 const createCard = (exercise, exerciseId) => {
+    let duration = "";
+    if(exercise.exercise === "Gym") {
+        duration = "Duration: <b>" + exercise.duration + "</b> min";
+    }else {
+        duration = "Distance: <b>" + exercise.duration + "</b> miles";
+    }
+
+
    return `
-       <div class="card">
-         <header class="card-header">
-           <p class="card-header-title">Date: ${exercise.date}</p>
-         </header>
-         <div class="card-content">
-           <div class="content">Exercise: ${exercise.exercise}</div>
-         </div>
-       </div>
+        <div class="column is-3">
+            <div class="card">
+                <header class="card-header">
+                <p class="card-header-title is-centered">
+                ${exercise.exercise}
+                </p>
+            </header>
+            <div class="card-content has-text-centered">
+                <img src="assets/${exercise.exercise}.svg">
+                    <h3 class="subtitle is-6 is-spaced"><br>
+                    ${duration}<br>
+                    Date: <b>${exercise.date}</b>
+                </h3>
+            </div>
+            <footer class="card-footer">
+                <a href="#" class="card-footer-item">Edit</a>
+                <a href="#" class="card-footer-item has-text-danger">Delete</a>
+            </footer>
+            </div>
+        </div>
    `;
 };
 
@@ -98,30 +118,31 @@ const createPlanCard = (plan, planId) => {
    `;
 };
 
-let numPressed = 0;
 function logExercise() {
-    numPressed++;
+    document.getElementById('logDiv').style.display = 'none';
+    document.getElementById('confirmLogDiv').style.display = 'block';
+}
 
-    if(numPressed === 1) {
-        document.getElementById('logExerciseDiv').style.display="block";
-        document.getElementById('logExerciseButton').innerHTML = "Confirm";
-    }else {
-        document.getElementById('logExerciseDiv').style.display="none";
-        numPressed = 0;
+function confirmLog() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
 
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
 
-        today = mm + '/' + dd + '/' + yyyy;
+    firebase.database().ref(`users/${googleUser.uid}`).push({
+        date: today,
+        exercise: document.getElementById('exerciseSelect').value,
+        duration: document.getElementById('durationInput').value
+    });
 
-        firebase.database().ref(`users/${googleUser.uid}`).push({
-            date: today,
-            exercise: document.getElementById('exerciseSelect').value,
-        });
-        document.getElementById('logExerciseButton').innerHTML = "Log A New Exercise";
-    }
+    cancelLog();
+}
+
+function cancelLog() {
+    document.getElementById('logDiv').style.display = 'block';
+    document.getElementById('confirmLogDiv').style.display = 'none';
 }
 
 function changeIcon() {
