@@ -24,3 +24,7 @@ window.onload = (event) => {
     }
   });
 };
+
+function launchExerciseModal() {
+    document.getElementById('logExerciseModal').classList.toggle("is-active");
+}
