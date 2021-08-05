@@ -18,6 +18,7 @@ window.onload = (event) => {
         document.getElementById('profilePic').src="assets/profilepic/" + profilePic + ".png";
         document.getElementById('profileNav').src="assets/profilepic/" + profilePic + ".png";
     });
+    getFood(googleUser.uid);
     getExercises(googleUser.uid);
     getPlans(googleUser.uid);
     } else {
@@ -25,6 +26,55 @@ window.onload = (event) => {
     }
   });
 };
+
+const getFood = (userId) => {
+    const foodRef = firebase.database().ref(`users/${userId}/food-tracker/2021-08-01/`).on('value', (snapshot) => {
+        const data = snapshot.val();
+        renderFoodAsHtml(data);
+    });
+}
+
+const renderFoodAsHtml = (data) => {
+    foodEntries = '';
+    for(const day in data)
+    {
+        let entryID = data[day];
+        for(food in entryID){
+            foodEntries += createFoodCard(entryID[food], day);
+        }
+    }
+    // Get food-log-title
+    let foodLogTitle = document.getElementById("food-log-title");
+    let content = document.createElement("div");
+    content.classList.add("columns")
+    content.innerHTML = foodEntries;
+    foodLogTitle.insertAdjacentElement("afterend", content);
+}
+
+const createFoodCard = (foods, date) => {
+    return `
+        <div class="column is-3">
+                  <div class="card">
+                      <header class="card-header">
+                        <p class="card-header-title is-centered">
+                        ${foods.food}
+                        </p>
+                    </header>
+                    <div class="card-content has-text-centered">
+                        <img src="${foods.imageURL}">
+                        <h3 class="subtitle is-6 is-spaced"><br>
+                            Calories: <b>${foods.calorieCount}</b><br>
+                            Date: <b>${date}</b>
+                        </h3>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item">Edit</a>
+                        <a href="#" class="card-footer-item has-text-danger">Delete</a>
+                    </footer>
+                  </div>
+              </div>
+    `
+}
 
 const getExercises = (userId) => {
     const exercisesRef = firebase.database().ref(`users/${userId}`);
