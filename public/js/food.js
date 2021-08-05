@@ -5,7 +5,7 @@ let totalCalories = 0;
 
 window.onload = (event) => {
   firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
+    if (user) {        
         console.log('Logged in as: ' + user.displayName);
         googleUserId = user.uid;
         // Load the calendar visuals
@@ -63,14 +63,6 @@ function loadCalendar(data,) {
             }
         }              
     });
-}
-
-const uploadFood = (week, day) => {
-    firebase.database().ref(`users/${googleUserId}/food-tracker/${week}/${day}`).push({
-        food : "pizza",
-        calorieCount: 1000,
-        imageURL: "empty",
-    })
 }
 
 function getSunday(d) {
@@ -158,6 +150,7 @@ function saveEntry() {
 
     editModal = document.getElementById("editModal");
     editModal.classList.toggle("is-active");
+    location.reload();
 }
 // Delete Entry
 function deleteEntry() {
@@ -168,7 +161,7 @@ function deleteEntry() {
     let id = entryId.value;
 
     firebase.database().ref(`users/${googleUserId}/food-tracker/${sunday}/${targetDay.value}/${id}`).remove();
-    let editEntryModal = document.getElementById("editEntryModal");
+    let editEntryModal = document.getElementById("editModal");
     editEntryModal.classList.toggle("is-active");
 }
 // Close edit modal
@@ -178,11 +171,14 @@ function closeEditModal() {
 }
 // Activate add modal
 function addEntry(day) {
-    addModalTitle = document.getElementById("addmodalTitle");
-    addModalTitle.innerHTML = day;
+    addModalTitle = document.getElementById("modalTitle");
+    addModalTitle.innerHTML = "Add Entry for " + day;
 
     addEntryModal = document.getElementById("addEntryModal");
     addEntryModal.classList.toggle("is-active");
+    // Populate serving size to default at 1
+    let servingSize = document.getElementById("servingSizeBox");
+    servingSize.value = 1;
     // "Save" target date into a hidden textbox for later
     targetDate = document.getElementById("targetDate");
     targetDate.value = day;
@@ -197,11 +193,15 @@ function createEntry(data) {
     // Get target date from hidden textbox
     let targetDay = document.getElementById("targetDate");
     let targetDate = findTargetDate(targetDay.value)
-    
+    // Get serving size
+    let servingSize = document.getElementById("servingSizeBox").value;
     // Get data from edamam api
-    let food = data.hits[0].recipe.label;
-    let calories = data.hits[0].recipe.calories;
-    let imageURL = data.hits[0].recipe.image;
+    let food = data.hints[0].food.label
+    let calories = data.hints[0].food.nutrients.ENERC_KCAL;
+    let imageURL = data.hints[0].food.image;
+
+    // Adjust calorie count by serving size
+    calories *= servingSize; 
 
     firebase.database().ref(`users/${googleUserId}/food-tracker/${sunday}/${targetDate}`).push({
         calorieCount : Math.round(calories),
@@ -211,6 +211,7 @@ function createEntry(data) {
 
     addEntryModal = document.getElementById("addEntryModal");
     addEntryModal.classList.toggle("is-active");
+    location.reload();
 }
 
 // Finds date from day of the week
@@ -233,9 +234,9 @@ function findTargetDate(day) {
 // Api
 async function sendApiRequest() {
     let searchValue = document.getElementById("searchBox").value;
-    let app_id = "5a25d1bf"
-    let api_key = "acb0d0b58448bda95778443778a66e62";
-    let response = await fetch(`https://api.edamam.com/search?app_id=${app_id}&app_key=${api_key}&q=${searchValue}`);
+    let app_id = "f35a6ea0"
+    let api_key = "86aba272e4382c284591d5a8ea5d3f64";
+    let response = await fetch(`https://api.edamam.com/api/food-database/v2/parser?app_id=${app_id}&app_key=${api_key}&ingr=${searchValue}`);
     let data = await response.json()
     console.log(data)
     
