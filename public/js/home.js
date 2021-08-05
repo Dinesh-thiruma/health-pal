@@ -91,3 +91,18 @@ function changeIcon() {
             break; 
     }
 }
+
+function logExercise() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+
+    firebase.database().ref(`users/${googleUser.uid}`).push({
+        date: today,
+        exercise: document.getElementById('exerciseSelect').value,
+    });
+    toggleExerciseModal();
+}
