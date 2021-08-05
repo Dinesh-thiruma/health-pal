@@ -62,3 +62,8 @@ const createCard = (exercise, exerciseId) => {
      </div>
    `;
 };
+
+
+function launchExerciseModal() {
+    document.getElementById('logExerciseModal').classList.toggle("is-active");
+}

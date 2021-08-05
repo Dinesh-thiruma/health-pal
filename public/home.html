@@ -10,6 +10,7 @@
     <script defer src="/__/firebase/8.8.1/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/8.8.1/firebase-auth.js"></script>
+    <script defer src="https://kit.fontawesome.com/d4dbed8638.js" crossorigin="anonymous"></script>
     <script defer src="/__/firebase/8.8.1/firebase-database.js"></script>
     <script defer src="/__/firebase/8.8.1/firebase-firestore.js"></script>
     <script defer src="/__/firebase/8.8.1/firebase-functions.js"></script>
@@ -52,6 +53,10 @@
                 Exercise
             </a>
 
+            <a class="navbar-item" href="aboutUs.html">
+                About Us
+            </a>
+
             </div>
 
             <div class="navbar-end">
@@ -60,9 +65,9 @@
                     <p class="heading" style="margin-top:6px;">
                         Signed in as&nbsp&nbsp
                     </p>
-                    <img id="profileNav" src="assets/profilepic/boy2red.png" class="image is-24x24"/>
+                    <img id="profileNav" src="" class="image is-24x24"/>
                     <p id="nameNav" class="subtitle is-5" id="">
-                        <strong>&nbspDinesh</strong>
+                        <strong></strong>
                     </p>
                 </a>
 
@@ -83,12 +88,12 @@
     </nav>
 
       <section><br><br><br>
-          <img id="profilePic" style="width: 20%; margin: auto;"class="image" src="https://www.pngarts.com/files/3/Avatar-PNG-Download-Image.png" alt="Profile Picture"/>
+          <img id="profilePic" style="width: 20%; margin: auto;"class="image" src=""/>
           <br><h2 class="has-text-centered heading is-5">
               Welcome back,
           </h2>
           <h1 class="has-text-centered title is-3" id="welcomeText">
-              Dinesh
+              
           </h1>
           <nav class="level">
             <div class="level-item has-text-centered">
@@ -440,11 +445,44 @@
               </div>
           </div>
           <div class="has-text-centered">
-                <a class="button is-success is-outlined" href="exercise.html">
+                <button class="button is-success is-outlined" onclick="launchExerciseModal()">
                     Log A New Exercise
-                </a>
+                </button>
             </div>
       </section>
+
+      <div id="logExerciseModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+            <p class="modal-card-title">Log A New Exercise</p>
+            <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <h1 class="title is-3">
+                    Exercise:
+                </h1>
+                <div class="control has-icons-left">
+                    <div class="select">
+                        <select>
+                        <option selected>Run</option>
+                        <option>Walk</option>
+                        <option>Swim</option>
+                        <option>Bike</option>
+                        <option>Gym</option>
+                        </select>
+                    </div>
+                    <span class="icon is-medium is-left has-text-dark">
+                        <i class="fas fa-running is-dark"></i>
+                    </span>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+            <button class="button is-danger">Log</button>
+            <button class="button">Cancel</button>
+            </footer>
+        </div>
+    </div>
 
       <section><br><br>
           <h2 class="title is-3" style="margin-left: 5%">
