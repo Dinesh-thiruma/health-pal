@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Health Pal</title>
+    <title>Health Pal - Food Tracker</title>
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/8.8.1/firebase-app.js"></script>
@@ -27,64 +27,70 @@
     
   </head>
   <body>
-      <section>
+      <div class="box">
           <h1 class="has-text-centered title">
               Welcome to Health Pal Food
           </h1>
-      </section>
-      <div class="container">
+      </div>
+      <div class="section">
             <div class="tile is-ancestor" id="ancestorTile">
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Sunday</p>
                         <button class="button is-small" onclick="addEntry(`Sunday`)">+</button>
-                    </div>               
+                    </div>            
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Monday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Monday`)">+</button>
                     </div>               
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Tuesday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Tuesday`)">+</button>
                     </div>               
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Wednesday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Wednesday`)">+</button>
                     </div>               
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Thursday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Thursday`)">+</button>
                     </div>               
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Friday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Friday`)">+</button>
                     </div>               
                 </div>
-                <div class="tile">
+                <div class="tile is-child box">
                     <!-- Add content or other tiles -->
-                    <div class="content calendarContent">
+                    <div class="content">
                         <p class="title calendar">Saturday</p>
-                        <button class="button is-small">+</button>
+                        <button class="button is-small" onclick="addEntry(`Saturday`)">+</button>
                     </div>               
                 </div>
             </div>
       </div>
+      <div class="box">
+        <h1 class="title">Calorie Goal</h1>
+        <progress id="calorieProgress" class="progress is-danger" value="0" max="100"></progress>
+        <input id="calorieGoal" class="input" type="number" placeholder="Insert Calorie Goal">
+      </div>
+      
       <!-- Add modal -->
       <div id="addEntryModal" class="modal">
         <div class="modal-background"></div>
@@ -94,21 +100,13 @@
             </header>
             <section class="modal-card-body">
                 <div style="float:left;">
-                    <label> Food </label>
-                    <input class="input is-normal" id="addFood" type="text" size="35"/>
+                    <label> Food discription </label>
+                    <input class="input is-normal" id="searchBox" type="text" size="35"/>
                 </div>
-                <div style="float:left;">
-                    <label> Calorie Count</label>
-                    <input class="input is-normal" id="addCalorieCount" type="text" size="10"/>
-                </div>
-                <div>
-                    <label> Image URL (optional)</label>
-                    <input class="input is-normal" id="addImageURL" type="text""/>
-                </div>
-                <input id="dayId" type="hidden"/>
+                <input id="targetDate" type="hidden"/>
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success" onclick="createEntry()">
+                <button class="button is-success" onclick="sendApiRequest()">
                     Add Entry
                 </button>
                 <button class="button" onclick="closeModal()">
@@ -118,7 +116,7 @@
         </div>
       </div>
       <!-- Edit modal -->
-      <div id="editDayModal" class="modal">
+      <div id="editModal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
@@ -137,13 +135,16 @@
                     <label> Image URL (optional)</label>
                     <input class="input is-normal" id="editImageURL" type="text""/>
                 </div>
-                <input id="dayId" type="hidden"/>
+                <input id="entryID" type="hidden"/>
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success" onclick="saveDay()">
+                <button class="button is-success" onclick="saveEntry()">
                     Save changes
                 </button>
-                <button class="button" onclick="closeDayModal()">
+                <button class="button is-danger" onclick="deleteEntry()">
+                    Delete
+                </button>
+                <button class="button" onclick="closeEditModal()">
                     Cancel
                 </button>
             </footer>
