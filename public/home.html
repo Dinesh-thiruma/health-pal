@@ -445,7 +445,7 @@
               </div>
           </div>
           <div class="has-text-centered">
-                <button class="button is-success is-outlined" onclick="launchExerciseModal()">
+                <button class="button is-success is-outlined" onclick="toggleExerciseModal()">
                     Log A New Exercise
                 </button>
             </div>
@@ -456,15 +456,15 @@
         <div class="modal-card">
             <header class="modal-card-head">
             <p class="modal-card-title">Log A New Exercise</p>
-            <button class="delete" aria-label="close"></button>
+            <button class="delete" aria-label="close" onclick="toggleExerciseModal()"></button>
             </header>
             <section class="modal-card-body">
-                <h1 class="title is-3">
+                <h1 class="title is-5">
                     Exercise:
                 </h1>
                 <div class="control has-icons-left">
                     <div class="select">
-                        <select>
+                        <select id="exerciseSelect" onchange="changeIcon();">
                         <option selected>Run</option>
                         <option>Walk</option>
                         <option>Swim</option>
@@ -473,13 +473,13 @@
                         </select>
                     </div>
                     <span class="icon is-medium is-left has-text-dark">
-                        <i class="fas fa-running is-dark"></i>
+                        <i id="exerciseIcon" class="fas fa-running"></i>
                     </span>
                 </div>
             </section>
             <footer class="modal-card-foot">
             <button class="button is-danger">Log</button>
-            <button class="button">Cancel</button>
+            <button class="button" onclick="toggleExerciseModal()">Cancel</button>
             </footer>
         </div>
     </div>
