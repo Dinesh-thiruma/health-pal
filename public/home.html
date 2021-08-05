@@ -24,7 +24,7 @@
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-    <script src=""></script>
+    <script defer src="js/home.js"></script>
   </head>
   <body>
 
@@ -52,9 +52,18 @@
                 Exercise
             </a>
 
-            <div class="navbar-item has-dropdown is-hoverable">
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable" style="margin-right: 30%;">
                 <a class="navbar-link">
-                More
+                    <p class="heading" style="margin-top:6px;">
+                        Signed in as&nbsp&nbsp
+                    </p>
+                    <img id="profileNav" src="assets/profilepic/boy2red.png" class="image is-24x24"/>
+                    <p id="nameNav" class="subtitle is-5" id="">
+                        <strong>&nbspDinesh</strong>
+                    </p>
                 </a>
 
                 <div class="navbar-dropdown">
@@ -70,26 +79,15 @@
                 </a>
                 </div>
             </div>
-            </div>
-
-            <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                <a class="button is-danger is-outlined" href="index.html">
-                    Sign Out
-                </a>
-                </div>
-            </div>
-            </div>
         </div>
     </nav>
 
       <section><br><br><br>
-          <img style="width: 20%; margin: auto;"class="image" src="https://www.pngarts.com/files/3/Avatar-PNG-Download-Image.png" alt="Profile Picture"/>
+          <img id="profilePic" style="width: 20%; margin: auto;"class="image" src="https://www.pngarts.com/files/3/Avatar-PNG-Download-Image.png" alt="Profile Picture"/>
           <br><h2 class="has-text-centered heading is-5">
               Welcome back,
           </h2>
-          <h1 class="has-text-centered title is-3">
+          <h1 class="has-text-centered title is-3" id="welcomeText">
               Dinesh
           </h1>
           <nav class="level">
