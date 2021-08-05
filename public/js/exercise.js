@@ -62,7 +62,7 @@ const renderDataAsHtml = (data) => {
     }
   };
   // Inject our string of HTML into our viewNotes.html page
-  document.querySelector('#plans').innerHTML = plans;
+  document.querySelector('#plan').innerHTML = plans;
 };
 
 const createCard = (plan, planId) => {
