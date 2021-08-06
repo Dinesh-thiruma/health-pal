@@ -8,9 +8,19 @@ window.onload = (event) => {
     if (user) {        
         console.log('Logged in as: ' + user.displayName);
         googleUserId = user.uid;
+
+        firebase.database().ref(`users/${user.uid}/userInfo/`).on('value', (snapshot) => {
+            const data = snapshot.val();
+            name = data.name;
+            profilePic = data.profilePic;
+            document.getElementById('nameNav').innerHTML = "<strong>&nbsp" + name + "</strong>";
+            document.getElementById('profileNav').src="assets/profilepic/" + profilePic + ".png";
+        });
+
         // Load sunday from the database
         const sundayRef = firebase.database().ref(`users/${googleUserId}/food-tracker/info/selected-week`).on('value', (snapshot) => {
             const data = snapshot.val();
+            
             // If there isn't any data set current date's sunday
             if(data == null)
             {
@@ -112,8 +122,10 @@ function createCalendar(info, id , day) {
         <figure class="image">
             <img src="${info.imageURL}">
         </figure>
-        <p>${info.food}</p>
-        <p>${info.calorieCount}</p>
+        <p class="heading">Food</p>
+        <p style="margin-top: -10px;">${info.food}</p>
+        <p class="heading">Calories</p>
+        <p style="margin-top: -10px;">${info.calorieCount} calories</p>
         <button class="button is-small" onclick="editEntry('${id}','${day}')">Edit</button>
     `
 }
@@ -226,8 +238,7 @@ function createEntry(data) {
         imageURL : imageURL
     })
 
-    addEntryModal = document.getElementById("addEntryModal");
-    addEntryModal.classList.toggle("is-active");
+    closeModal();
     location.reload();
 }
 
