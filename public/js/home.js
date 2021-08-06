@@ -2,6 +2,13 @@ let googleUser;
 let name;
 let profilePic;
 
+let exerciseNum = 1;
+let workouts = [];
+
+let calorieCount = 0;
+let milesCount = 0;
+let timeCount = 0;
+
 window.onload = (event) => {
   // Use this to retain user state between html pages.
   firebase.auth().onAuthStateChanged(function(user) {
@@ -9,6 +16,41 @@ window.onload = (event) => {
       console.log('Logged in as: ' + user.displayName);
       googleUser = user;
 
+    const exercisesRef = firebase.database().ref(`users/${googleUser.uid}/workout`);
+    exercisesRef.on('value', (snapshot) => {
+        if(snapshot.exists()) {
+            document.getElementById('workoutCardColumns').style.display = 'flex';
+            document.getElementById('noWorkoutDiv').style.display = 'none';
+        }else {
+            document.getElementById('workoutCardColumns').style.display = 'none';
+            document.getElementById('noWorkoutDiv').style.display = 'block';
+        }
+    });
+
+    const exerciseRef = firebase.database().ref(`users/${googleUser.uid}/exercise`);
+    exerciseRef.on('value', (snapshot) => {
+        if(snapshot.exists()) {
+            document.getElementById('cardColumns').style.display = 'flex';
+            document.getElementById('noExerciseDiv').style.display = 'none';
+        }else {
+            document.getElementById('cardColumns').style.display = 'none';
+            document.getElementById('noExerciseDiv').style.display = 'block';
+        }
+    });
+
+    const foodsRef = firebase.database().ref(`users/${googleUser.uid}/food-tracker/2021-08-01`);
+    foodsRef.on('value', (snapshot) => {
+        console.log(snapshot.exists());
+        if(snapshot.exists()) {
+            document.getElementById('food-log-title').style.display = 'block';
+            document.getElementById('noFoodDiv').style.display = 'none';
+        }else {
+            document.getElementById('food-log-title').style.display = 'none';
+            document.getElementById('noFoodDiv').style.display = 'block';
+        }
+    });
+
+    
     firebase.database().ref(`users/${user.uid}/userInfo/`).on('value', (snapshot) => {
         const data = snapshot.val();
         name = data.name;
@@ -18,9 +60,11 @@ window.onload = (event) => {
         document.getElementById('profilePic').src="assets/profilepic/" + profilePic + ".png";
         document.getElementById('profileNav').src="assets/profilepic/" + profilePic + ".png";
     });
+
     getFood(googleUser.uid);
     getExercises(googleUser.uid);
     getPlans(googleUser.uid);
+
     } else {
       window.location = 'index.html'; // If not logged in, navigate back to login page.
     }
@@ -54,6 +98,9 @@ const renderFoodAsHtml = (data) => {
 }
 
 const createFoodCard = (foods, date) => {
+    calorieCount += parseInt(foods.calorieCount);
+    console.log(calorieCount);
+    document.getElementById('calorieCount').innerHTML = calorieCount + " cals";
     return `
         <div class="column is-3">
                   <div class="card">
@@ -79,7 +126,7 @@ const createFoodCard = (foods, date) => {
 }
 
 const getExercises = (userId) => {
-    const exercisesRef = firebase.database().ref(`users/${userId}`);
+    const exercisesRef = firebase.database().ref(`users/${userId}/exercise`);
     exercisesRef.on('value', (snapshot) => {
         const data = snapshot.val();
         renderDataAsHtml(data);
@@ -90,7 +137,6 @@ const renderDataAsHtml = (data) => {
   let exercises = ``;
   for(const exerciseId in data) {
     const exercise = data[exerciseId];
-    console.log('here');
     // For each note create an HTML card
     if(exercise.date != null)
     {
@@ -103,10 +149,17 @@ const renderDataAsHtml = (data) => {
 
 const createCard = (exercise, exerciseId) => {
     let duration = "";
+    let durationTitle = "";
     if(exercise.exercise === "Gym") {
-        duration = "Duration: <b>" + exercise.duration + "</b> min";
+        durationTitle = "Duration: ";
+        duration = "<b>" + exercise.duration + "</b> min";
+        timeCount += parseInt(exercise.duration);
+        document.getElementById('timeCount').innerHTML = timeCount + " min";
     }else {
-        duration = "Distance: <b>" + exercise.duration + "</b> miles";
+        durationTitle = "Distance: ";
+        duration = "<b>" + exercise.duration + "</b> miles";
+        milesCount += parseInt(exercise.duration);
+        document.getElementById('milesCount').innerHTML = milesCount + " miles";
     }
 
 
@@ -121,8 +174,8 @@ const createCard = (exercise, exerciseId) => {
             <div class="card-content has-text-centered">
                 <img src="assets/${exercise.exercise}.svg">
                     <h3 class="subtitle is-6 is-spaced"><br>
-                    ${duration}<br>
-                    Date: <b>${exercise.date}</b>
+                    <p class="heading">${durationTitle}</p>${duration}<br><br>
+                    <p class="heading">Date:</p> <b>${exercise.date}</b>
                 </h3>
             </div>
             <footer class="card-footer">
@@ -135,7 +188,7 @@ const createCard = (exercise, exerciseId) => {
 };
 
 const getPlans = (userId) => {
-    const exercisesRef = firebase.database().ref(`users/${userId}`);
+    const exercisesRef = firebase.database().ref(`users/${userId}/workout`);
     exercisesRef.on('value', (snapshot) => {
         const data = snapshot.val();
         renderPlanDataAsHtml(data);
@@ -146,28 +199,56 @@ const renderPlanDataAsHtml = (data) => {
   let plans = ``;
   for(const planId in data) {
     const plan = data[planId];
-    console.log('here');
-    // For each note create an HTML card
-    if(plan.repetitions != null)
-    {
-        plans += createPlanCard(plan, planId);
-    }
+    plans += createPlanCard(data, plan, planId);
   };
   // Inject our string of HTML into our viewNotes.html page
-  document.querySelector('#plansCard').innerHTML = plans;
+  document.querySelector('#workoutCardColumns').innerHTML = plans;
 };
 
-const createPlanCard = (plan, planId) => {
-   return `
-       <div class="card">
-         <header class="card-header">
-           <p class="card-header-title">Workout: ${plan.workout}</p>
-         </header>
-         <div class="card-content">
-           <div class="content">Reps/Duration: ${plan.repetitions}</div>
-         </div>
-       </div>
+const createPlanCard = (data, plan, planId) => {
+    let html = `
+        <div class="column is-3">
+            <div class="card">
+                <header class="card-header">
+                <p class="card-header-title is-centered">
+                ${planId}
+                </p>
+            </header>
+        <div class="card-content has-text-centered">
+            <h3 class="subtitle is-6 is-spaced">
+    `;
+
+
+    let num = 0;
+    while(data[planId][num] !== undefined) {
+        console.log(data[planId][num].exercise);
+        num++;
+        if(data[planId][num-1].exercise === "Custom") {
+            html += `
+                <p class="heading">Exercise #${num}:</p>${data[planId][num-1].exerciseName}<br><br>
+                <p class="heading">Reps:</p> <b>${data[planId][num-1].reps}</b><hr>
+            `;
+        }else {
+            html += `
+                <p class="heading">Exercise #${num}:</p>${data[planId][num-1].exercise}<br><br>
+                <p class="heading">Reps:</p> <b>${data[planId][num-1].reps}</b><hr>
+            `;
+        }
+    }
+
+    html += `
+                </h3>
+            </div>
+            <footer class="card-footer">
+                <a href="#" class="card-footer-item">Edit</a>
+                <a href="#" class="card-footer-item has-text-danger">Delete</a>
+            </footer>
+            </div>
+        </div>
    `;
+
+    return html.substr(0, html.lastIndexOf('<hr>')) + html.substr(html.lastIndexOf('<hr>')+4, html.length);
+
 };
 
 function logExercise() {
@@ -183,7 +264,7 @@ function confirmLog() {
 
     today = mm + '/' + dd + '/' + yyyy;
 
-    firebase.database().ref(`users/${googleUser.uid}`).push({
+    firebase.database().ref(`users/${googleUser.uid}/exercise`).push({
         date: today,
         exercise: document.getElementById('exerciseSelect').value,
         duration: document.getElementById('durationInput').value
@@ -219,4 +300,84 @@ function changeIcon() {
            exerciseIcon.classList.add('fa-dumbbell');
             break; 
     }
+}
+
+function createWorkout() {
+    document.getElementById('workoutDiv').style.display = 'none';
+    document.getElementById('confirmWorkoutDiv').style.display = 'block';
+}
+
+function confirmCreate() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+
+    firebase.database().ref(`users/${googleUser.uid}/exercise`).push({
+        date: today,
+        exercise: document.getElementById('exerciseSelect').value,
+        duration: document.getElementById('durationInput').value
+    });
+
+    cancelCreate();
+}
+
+function cancelCreate() {
+    document.getElementById('workoutDiv').style.display = 'block';
+    document.getElementById('confirmWorkoutDiv').style.display = 'none';
+}
+
+function changeWorkoutIcon() {
+    const workoutIcon = document.getElementById('workoutIcon');
+    const workoutNameDiv = document.getElementById('workoutNameDiv');
+    switch(document.getElementById('workoutSelect').value) {
+        case "Push-ups":
+            workoutIcon.src=`https://static.thenounproject.com/png/660576-200.png`;
+            workoutNameDiv.style.display='none';
+            break;
+        case "Pull-ups":
+            workoutIcon.src=`https://static.thenounproject.com/png/83591-200.png`;
+            workoutNameDiv.style.display='none';
+            break;
+        case "Sit-ups":
+            workoutIcon.src=`https://i1.wp.com/ukandufitness.com/wp-content/uploads/2015/05/sit-up-icon.png?ssl=1`;
+            workoutNameDiv.style.display='none';
+            break;
+        case "Bench Press":
+            workoutIcon.src=`https://static.thenounproject.com/png/83592-200.png`;
+            workoutNameDiv.style.display='none';
+            break;
+        case "Custom":
+            workoutIcon.src=`https://static.thenounproject.com/png/95683-200.png`;
+            workoutNameDiv.style.display='block';
+            break; 
+    }
+}  
+
+function addExercise() {
+    exerciseNum++;
+    document.getElementById('exerciseNum').innerHTML = "Exercise #" + exerciseNum;
+
+    const workoutName = document.getElementById('workoutNameInput').value;
+    const exercise = document.getElementById('workoutSelect').value;
+    const reps = document.getElementById('repsInput').value;
+
+    if(exercise === "Custom") {
+        const exerciseName = document.getElementById('exerciseNameInput').value;
+        workouts = { exercise, reps, exerciseName };
+    }else {
+        workouts = { exercise, reps };
+    }
+
+    firebase.database().ref(`users/${googleUser.uid}/workout/${workoutName}`).update({
+        [exerciseNum-2] : workouts
+    })
+}
+
+function confirmCreate() {
+    addExercise();
+    exerciseNum = 1;
+    cancelCreate();
 }
