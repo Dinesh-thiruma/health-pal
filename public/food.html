@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Health Pal - Food Tracker</title>
+    <title>Food | HealthPal</title>
+    <link rel="shortcut icon" href="assets/Logo.png" />
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/8.8.1/firebase-app.js"></script>
@@ -27,73 +28,146 @@
     
   </head>
   <body>
-      <div class="box">
-          <h1 class="has-text-centered title">
-              Welcome to Health Pal Food
-          </h1>
-      </div>
+      <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="home.html">
+            <img class="image" src="assets/Logo.png"><br>
+            <p class="title is-5">&nbspHealthPal</p>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+            <a class="navbar-item is-tab is-active">
+                Food
+            </a>
+
+            <a class="navbar-item" href="home.html">
+                Exercise
+            </a>
+
+            <a class="navbar-item" href="aboutUs.html">
+                About Us
+            </a>
+
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable" style="margin-right: 10%;">
+                <a class="navbar-link">
+                    <p class="heading" style="margin-top:6px;">
+                        Signed in as&nbsp&nbsp
+                    </p>
+                    <img id="profileNav" src="" class="image is-24x24"/>
+                    <p id="nameNav" class="subtitle is-5" id="">
+                        <strong></strong>
+                    </p>
+                </a>
+
+                <div class="navbar-dropdown">
+                <a class="navbar-item">
+                    Settings
+                </a>
+                <a class="navbar-item">
+                    My Account
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item has-text-danger" href="index.html">
+                    Sign Out
+                </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <br><br><br>
+    <h1 class="title has-text-centered">
+        Calorie Calendar
+    </h1>
+    <h2 class="heading has-text-centered" style="margin-top: -20px;">
+        Keep Track of your Weekly Caloric Intake!
+    </h2>
       <div class="section">
             <div class="tile is-ancestor" id="ancestorTile">
                 <div class="tile is-child box">
                     <!-- Add content or other tiles -->
                     <div class="content">
-                        <p class="title calendar">Sunday</p>
+                        <p class="heading calendar">Sunday</p>
                         <button class="button is-small" onclick="addEntry(`Sunday`)">+</button>
                     </div>            
                 </div>
                 <div class="tile is-child box">
                     <!-- Add content or other tiles -->
                     <div class="content">
-                        <p class="title calendar">Monday</p>
+                        <p class="heading calendar">Monday</p>
                         <button class="button is-small" onclick="addEntry(`Monday`)">+</button>
                     </div>               
                 </div>
                 <div class="tile is-child box">
                     <!-- Add content or other tiles -->
                     <div class="content">
-                        <p class="title calendar">Tuesday</p>
+                        <p class="heading calendar">Tuesday</p>
                         <button class="button is-small" onclick="addEntry(`Tuesday`)">+</button>
                     </div>               
                 </div>
                 <div class="tile is-child box">
                     <!-- Add content or other tiles -->
                     <div class="content">
-                        <p class="title calendar">Wednesday</p>
+                        <p class="heading calendar">Wednesday</p>
                         <button class="button is-small" onclick="addEntry(`Wednesday`)">+</button>
                     </div>               
                 </div>
                 <div class="tile is-child box">
                     <!-- Add content or other tiles -->
                     <div class="content">
-                        <p class="title calendar">Thursday</p>
+                        <p class="heading calendar">Thursday</p>
                         <button class="button is-small" onclick="addEntry(`Thursday`)">+</button>
                     </div>               
                 </div>
                 <div class="tile is-child box">
                     <!-- Add content or other tiles -->
                     <div class="content">
-                        <p class="title calendar">Friday</p>
+                        <p class="heading calendar">Friday</p>
                         <button class="button is-small" onclick="addEntry(`Friday`)">+</button>
                     </div>               
                 </div>
                 <div class="tile is-child box">
                     <!-- Add content or other tiles -->
                     <div class="content">
-                        <p class="title calendar">Saturday</p>
+                        <p class="heading calendar">Saturday</p>
                         <button class="button is-small" onclick="addEntry(`Saturday`)">+</button>
                     </div>               
                 </div>
             </div>
-      </div>
-      <div class="box">
-        <h1 class="title">Calorie Goal</h1>
-        <progress id="calorieProgress" class="progress is-danger" value="0" max="100"></progress>
-        <input id="calorieGoal" class="input" type="number" placeholder="Insert Calorie Goal">
-      </div>
-      <div class="box">
-        <h1 class="title">Change Week</h1>
-        <input id="chosenDay" class="input" type="string" placeholder="8-9-2021">
-      </div>
+      </div><br>
+        <h1 class="title has-text-centered">Calorie Goal</h1>
+        <h2 class="heading has-text-centered" style="margin-top: -20px;">
+            Track Progress towards your caloric goals!
+        </h2><br>
+        <div class="columns is-centered">
+            <div class="column is-half has-text-centered">
+                <progress id="calorieProgress" class="progress is-danger" value="0" max="100"></progress>
+            </div>
+        </div>
+        <div class="columns is-centered">
+            <div class="column is-1 has-text-centered">
+                <input id="calorieGoal" class="input" type="number" placeholder="Goal">
+            </div>
+        </div><br>
+        <h1 class=" has-text-centered title">Calendar History</h1>
+        <h2 class="heading has-text-centered" style="margin-top: -20px;">
+            Go back in time and explore your caloric history!
+        </h2><br>
+        <div class="columns is-centered">
+            <div class="column is-2 has-text-centered">
+                <input id="chosenDay" class="input" type="string" placeholder="8-9-2021">
+            </div>
+        </div><br><br>
       
       <!-- Add modal -->
       <div id="addEntryModal" class="modal">
@@ -103,57 +177,74 @@
                 <p class="modal-card-title" id="modalTitle">Modal title</p>
             </header>
             <section class="modal-card-body">
-                <div style="float:left;">
-                    <label> Food discription </label>
-                    <input class="input is-normal" id="searchBox" type="text" size="35"/>
+                <div>
+                    <label> 
+                        <h1 class="heading">Food description</h1> 
+                    </label>
+                    <div class="columns">
+                        <div class="column is-half">
+                            <input autocomplete="off" class="input is-normal" id="searchBox" type="text" size="35"/><br><br>
+                        </div>
+                    </div>
                 </div>
-                <div style="float:left;">
-                    <label> Aprox Serving Size </label>
-                    <input class="input is-normal" id="servingSizeBox" type="number" size="35"/>
+                <div>
+                    <label> 
+                        <h1 class="heading">Approx. Serving Size</h1>
+                    </label>
+                    <div class="columns">
+                        <div class="column is-2">
+                            <input autocomplete="off" class="input is-normal" id="servingSizeBox" type="number" size="35"/>
+                        </div>
+                    </div>
                 </div>
                 <input id="targetDate" type="hidden"/>
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success" onclick="sendApiRequest()">
-                    Add Entry
-                </button>
                 <button class="button" onclick="closeModal()">
                     Cancel
+                </button>
+                <button class="button is-danger" onclick="sendApiRequest()">
+                    Add Entry
                 </button>
             </footer>
         </div>
       </div>
+
       <!-- Edit modal -->
       <div id="editModal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title" id="addmodalTitle">Modal title</p>
+                <p class="modal-card-title" id="addmodalTitle">Edit Food Entry</p>
             </header>
             <section class="modal-card-body">
-                <div style="float:left;">
-                    <label> Food </label>
-                    <input class="input is-normal" id="editFood" type="text" size="35"/>
+                <div class="columns">
+                    <div class="column is-half">
+                        <label class="heading"> Food </label>
+                        <input autocomplete="off" class="input is-normal" id="editFood" type="text" size="35"/><br>
+                    </div>
                 </div>
-                <div style="float:left;">
-                    <label> Calorie Count</label>
-                    <input class="input is-normal" id="editCalorieCount" type="text" size="10"/>
+                <div class="columns">
+                    <div class="column is-3">
+                        <label class="heading"> Calorie Count</label>
+                        <input autocomplete="off" class="input is-normal" id="editCalorieCount" type="text" size="10"/><br>
+                    </div>
                 </div>
                 <div>
-                    <label> Image URL (optional)</label>
-                    <input class="input is-normal" id="editImageURL" type="text""/>
+                    <label class="heading"> Image URL (optional)</label>
+                    <input autocomplete="off" class="input is-normal" id="editImageURL" type="text""/>
                 </div>
                 <input id="entryID" type="hidden"/>
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success" onclick="saveEntry()">
-                    Save changes
+                <button class="button" onclick="closeEditModal()">
+                    Cancel
                 </button>
                 <button class="button is-danger" onclick="deleteEntry()">
                     Delete
                 </button>
-                <button class="button" onclick="closeEditModal()">
-                    Cancel
+                <button class="button is-success" onclick="saveEntry()">
+                    Save
                 </button>
             </footer>
         </div>

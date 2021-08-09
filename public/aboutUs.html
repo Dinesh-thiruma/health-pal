@@ -17,6 +17,7 @@
     <script defer src="/__/firebase/8.8.1/firebase-analytics.js"></script>
     <script defer src="/__/firebase/8.8.1/firebase-remote-config.js"></script>
     <script defer src="/__/firebase/8.8.1/firebase-performance.js"></script>
+    <script defer src="js/aboutUs.js"></script>
     <!-- 
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
@@ -28,6 +29,64 @@
     <script src="https://kit.fontawesome.com/d4dbed8638.js" crossorigin="anonymous"></script>
     </head>
     <body><br>
+        <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="home.html">
+            <img class="image" src="assets/Logo.png"><br>
+            <p class="title is-5">&nbspHealthPal</p>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+            <a class="navbar-item" href="food.html">
+                Food
+            </a>
+
+            <a class="navbar-item" href="home.html">
+                Exercise
+            </a>
+
+            <a class="navbar-item is-tab is-active">
+                About Us
+            </a>
+
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable" style="margin-right: 10%;">
+                <a class="navbar-link">
+                    <p class="heading" style="margin-top:6px;">
+                        Signed in as&nbsp&nbsp
+                    </p>
+                    <img id="profileNav" src="" class="image is-24x24"/>
+                    <p id="nameNav" class="subtitle is-5" id="">
+                        <strong></strong>
+                    </p>
+                </a>
+
+                <div class="navbar-dropdown">
+                <a class="navbar-item">
+                    Settings
+                </a>
+                <a class="navbar-item">
+                    My Account
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item has-text-danger" href="index.html">
+                    Sign Out
+                </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <br><br>
         <div class="has-text-centered">
             <a href="index.html">
                 <img width="4%" src="assets/Logo.png">

@@ -9,6 +9,8 @@ let calorieCount = 0;
 let milesCount = 0;
 let timeCount = 0;
 
+let selectedWeek = "2021-08-08"
+
 window.onload = (event) => {
   // Use this to retain user state between html pages.
   firebase.auth().onAuthStateChanged(function(user) {
@@ -38,9 +40,12 @@ window.onload = (event) => {
         }
     });
 
-    const foodsRef = firebase.database().ref(`users/${googleUser.uid}/food-tracker/2021-08-01`);
+    firebase.database().ref(`users/${googleUser.uid}/food-tracker/info/selected-week`).on('value', (snapshot) => {
+        selectedWeek = snapshot.val().week;
+    });
+
+    const foodsRef = firebase.database().ref(`users/${googleUser.uid}/food-tracker/${selectedWeek}`);
     foodsRef.on('value', (snapshot) => {
-        console.log(snapshot.exists());
         if(snapshot.exists()) {
             document.getElementById('food-log-title').style.display = 'block';
             document.getElementById('noFoodDiv').style.display = 'none';
@@ -72,7 +77,11 @@ window.onload = (event) => {
 };
 
 const getFood = (userId) => {
-    const foodRef = firebase.database().ref(`users/${userId}/food-tracker/2021-08-01/`).on('value', (snapshot) => {
+    firebase.database().ref(`users/${googleUser.uid}/food-tracker/info/selected-week`).on('value', (snapshot) => {
+        selectedWeek = snapshot.val().week;
+    });
+
+    const foodRef = firebase.database().ref(`users/${userId}/food-tracker/${selectedWeek}/`).on('value', (snapshot) => {
         const data = snapshot.val();
         renderFoodAsHtml(data);
     });
@@ -110,10 +119,20 @@ const createFoodCard = (foods, date) => {
                         </p>
                     </header>
                     <div class="card-content has-text-centered">
-                        <img src="${foods.imageURL}">
-                        <h3 class="subtitle is-6 is-spaced"><br>
-                            Calories: <b>${foods.calorieCount}</b><br>
-                            Date: <b>${date}</b>
+                        <figure class="image">
+                            <img class="is-rounded" src="${foods.imageURL}">
+                        </figure>
+                        <h3 class="heading is-6"><br>
+                            Calories:
+                        </h3>
+                        <h3 class="class="subtitle is-6 is-spaced" style="margin-top:-5px;">
+                            <b>${foods.calorieCount}</b>
+                        </h3>
+                        <h3 class="heading is-6"><br>
+                            Date:
+                        </h3>
+                        <h3 class="subtitle is-6 is-spaced" style="margin-top:-5px;">
+                            <b>${date}</b>
                         </h3>
                     </div>
                     <footer class="card-footer">
@@ -202,7 +221,7 @@ const renderPlanDataAsHtml = (data) => {
     plans += createPlanCard(data, plan, planId);
   };
   // Inject our string of HTML into our viewNotes.html page
-  document.querySelector('#workoutCardColumns').innerHTML = plans;
+   document.querySelector('#workoutCardColumns').innerHTML = plans;
 };
 
 const createPlanCard = (data, plan, planId) => {
@@ -217,7 +236,6 @@ const createPlanCard = (data, plan, planId) => {
         <div class="card-content has-text-centered">
             <h3 class="subtitle is-6 is-spaced">
     `;
-
 
     let num = 0;
     while(data[planId][num] !== undefined) {
@@ -351,7 +369,7 @@ function changeWorkoutIcon() {
             break;
         case "Custom":
             workoutIcon.src=`https://static.thenounproject.com/png/95683-200.png`;
-            workoutNameDiv.style.display='block';
+            workoutNameDiv.style.display='flex';
             break; 
     }
 }  

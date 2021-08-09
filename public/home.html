@@ -49,7 +49,7 @@
                 Food
             </a>
 
-            <a class="navbar-item" href="exercise.html">
+            <a class="navbar-item" href="#exerciseDiv">
                 Exercise
             </a>
 
@@ -99,70 +99,85 @@
             <div class="level-item has-text-centered">
                 <div>
                 <p class="heading">Calories</p>
-                <p class="title">304K</p>
+                <p class="title" id="calorieCount">0 cals</p>
                 </div>
             </div>
             <div class="level-item has-text-centered">
                 <div>
                 <p class="heading">Miles</p>
-                <p class="title">87.69</p>
+                <p class="title" id="milesCount">0 miles</p>
                 </div>
             </div>
             <div class="level-item has-text-centered">
                 <div>
-                <p class="heading">Steps</p>
-                <p class="title">201K</p>
+                <p class="heading">Time</p>
+                <p class="title" id="timeCount">0 min</p>
                 </div>
             </div>
         </nav>
       </section>
       <hr>
       <section><br>
-          <h1 class="title is-2 has-text-centered">
+          <h1 class="title is-3 has-text-centered">
               Food Tracker
           </h1>
-          <h2 class="title is-3" style="margin-left: 5%" id="food-log-title">
-              Food Log:
+          <h2 class="heading has-text-centered" style="margin-top:-15px;">
+            A Powerful Tool to Control your Caloric Intake!
+          </h2><br>
+          <h2 class="heading is-4" style="margin-left: 5%" id="food-log-title">
+              Food Log:<br><br>
           </h2>
           
-          
+          <div class="has-text-centered" id='noFoodDiv'>
+            <img src="assets/Chef.svg" width="25%"/>
+            <h3 class="heading is-5"><br>
+                <br><br>You haven't logged any foods yet. <b>Click below to log one!</b><br><br>
+            </h3>
+          </div>
+
           <div class="has-text-centered">
                 <a class="button is-success is-outlined" href="food.html">
                     Log A New Food
                 </a>
             </div>
-      </section>
+      </section><br><hr>
 
-      <section><br><br>
-          <h2 class="title is-3" style="margin-left: 5%">
-              Your Diets:
+      <section><br>
+          <h2 class="title is-3 has-text-centered">
+              Diet Creator
           </h2>
+          <h2 class="heading has-text-centered" style="margin-top: -15px;">
+              Craft the perfect diet for your nutritional needs!
+          </h2><br>
           <div class="has-text-centered">
-            <img src="assets/ShoppingCart.svg" width="35%">
-            <h3 class="subtitle is-5"><br>
-                You haven't made any diets yet. Click below to create one!
+            <img src="assets/construction.svg" width="35%">
+            <h3 class="heading is-5"><br><br>
+                This feature is still under construction. <b>Check back later!</b><br><br>
             </h3>
-                <a class="button is-success is-outlined" href="food.html">
-                    Create A Diet
-                </a>
             </div>
       </section>
       <hr>
 
       <section><br>
-          <h1 class="title is-2 has-text-centered">
+          <h1 class="title is-3 has-text-centered">
               Exercise Tracker
           </h1>
-          <h2 class="title is-3" style="margin-left: 5%">
-              Exercise Log:
+          <h2 class="heading has-text-centered" style="margin-top: -15px;">
+              Log and track your daily exercises!
           </h2>
-          
+          <h2 class="heading is-3" style="margin-left: 5%">
+              Exercise Log:
+        </h2>
+        <br>
           <div id="cardColumns" class="columns" style="padding-left: 5%; padding-right: 5%; padding-bottom: 1%; overflow-x: auto">
-
           </div>
-          <div id="logExerciseDiv" class="has-text-centered" style="display: none;">
-            </div>
-            <br>
+          <div class="has-text-centered" id='noExerciseDiv'><br>
+            <img src="assets/Bike.svg" width="30%"/>
+            <h3 class="heading is-5"><br><br>
+                You haven't logged any exercises yet. <b>Click below to log one!</b>
+            </h3>
+          </div>
+        <br>
       </section>
 
     <div id="logDiv" class="has-text-centered">
@@ -203,27 +218,96 @@
         <button id="logExerciseButton" class="button is-success is-outlined" onclick="confirmLog()">
             Log
         </button>
-    </div>
+    </div><br><hr>
 
-      <section><br><br>
-          <h2 class="title is-3" style="margin-left: 5%">
-              Your Workouts:
+      <section><br>
+          <h2 class="title is-3 has-text-centered">
+              Workout Planner
           </h2>
-            <div class="has-text-centered">
-            <div class="columns" style="padding-left: 5%; padding-right: 5%; padding-bottom: 1%; overflow-x: auto">
+          <h2 class="heading has-text-centered" style="margin-top: -15px;">
+              Create and store custom workouts!
+          </h2>
+          <h2 class="heading is-3" style="margin-left: 5%">
+              Your Workouts:
+        </h2>
+        <br>
+        <div class="has-text-centered">
+            <div id="workoutCardColumns" class="columns" style="padding-left: 5%; padding-right: 5%; padding-bottom: 1%; overflow-x: auto">
                 <div class="column is-3" id="plansCard">
 
                 </div>
             </div>  
-            <!-- <img src="assets/PersonalTrainer.svg" width="35%">
-            <h3 class="subtitle is-5"><br>
-                You haven't made any workouts yet. Click below to create one!
-            </h3> -->
-                <a class="button is-success is-outlined" href="exercise.html">
+            <div class="has-text-centered" id='noWorkoutDiv'>
+                <img src="assets/PersonalTrainer.svg" width="35%"/>
+                <h3 class="heading is-5"><br>
+                    You haven't made any workouts yet. <b>Click below to create one!</b><br><br>
+                </h3>
+            </div>
+            <div id="workoutDiv" class="has-text-centered">
+                <a class="button is-success is-outlined" onclick="createWorkout()">
                     Create A Workout
                 </a>
             </div>
+        </div>
+
+    <div id="confirmWorkoutDiv" class="has-text-centered" style="display:none;">
+        <h1 class="heading">
+            Name your Workout <br>
+        </h1>
+        <div class="columns is-centered">
+            <div class="column is-2 has-text-centered">
+                <input id="workoutNameInput" autocomplete="off" class="input is-info is-small" type="text" placeholder="Workout Name"/>
+            </div>
+        </div>
+        <h1 class="heading" id="exerciseNum">
+            Exercise #1 <br>
+        </h1>
+        <div class="control has-icons-left">
+            <div class="select">
+                <select id="workoutSelect" onchange="changeWorkoutIcon();">
+                <option selected>Push-ups</option>
+                <option>Pull-ups</option>
+                <option>Sit-ups</option>
+                <option>Bench Press</option>
+                <option>Custom</option>
+                </select>
+            </div>
+            <span class="icon is-medium is-center has-text-dark" style="margin-left: -170px;">
+                <img id="workoutIcon" class="image is-24x24" src="https://static.thenounproject.com/png/660576-200.png"/>
+            </span>
+        </div><br>
+
+        <div class="columns is-centered" id="workoutNameDiv" style="display: none;">
+            <div class="column is-2 has-text-centered">
+                <h1 class="heading">
+                    Custom Exercise Name <br>
+                </h1>
+                <input autocomplete="off" id="exerciseNameInput" class="input is-info is-small" type="text" placeholder="Exercise Name"/>
+            </div>
+        </div>
+        
+        <h1 class="heading">
+            Repetitions <br>
+        </h1>
+        <div class="columns is-centered">
+            <div class="column is-1 has-text-centered">
+                <input autocomplete="off" id="repsInput" class="input is-info is-small" type="text" placeholder="reps"/>
+            </div>
+        </div>
+        <button class="button is-danger is-outlined" onclick="cancelCreate()">
+            Cancel
+        </button> &nbsp&nbsp&nbsp
+        <button class="button is-info is-outlined" onclick="addExercise()">
+            Add Exercise
+        </button> &nbsp&nbsp&nbsp
+        <button class="button is-success is-outlined" onclick="confirmCreate()">
+            Create
+        </button>
+    </div>
+
       </section><br><br><br>
+
+
       <footer class="footer" style="background-color: #d16286; color: white;">
             <div class="content has-text-centered">
                 <p>
