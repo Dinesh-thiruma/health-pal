@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "health-pal-6b469"
+    "default": "health-pal-6b469",
+    "staging": "health-pal-6b469"
   }
 }
